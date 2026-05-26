@@ -12,42 +12,35 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0d14;color:#e2e8f0;overflow-x:hidden;padding-bottom:64px}
 :root{--green:#10b981;--amber:#f59e0b;--red:#dc2626;--blue:#3b82f6;--purple:#8b5cf6;--pink:#ec4899;--bg2:#141821;--bg3:#1a1f2e;--border:#1e293b;--muted:#64748b;--text:#cbd5e1}
 
-/* Bottom tabs */
 .tabs{position:fixed;bottom:0;left:0;right:0;display:flex;background:#0a0d14;border-top:2px solid var(--border);z-index:100;padding:4px 0 env(safe-area-inset-bottom,4px)}
-.tab{flex:1;padding:10px 4px 8px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--muted);border:none;background:none;cursor:pointer;transition:.2s}
+.tab{flex:1;padding:8px 2px 6px;text-align:center;font-size:9px;font-weight:700;letter-spacing:.3px;color:var(--muted);border:none;background:none;cursor:pointer;transition:.2s}
 .tab.on{color:var(--amber)}
-.tab .ico{font-size:20px;display:block;margin-bottom:2px}
+.tab .ico{font-size:18px;display:block;margin-bottom:2px}
 .page{display:none;padding:16px}
 .page.on{display:block}
 
-/* Cards */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
 .card-title{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;font-weight:700}
 
-/* Selector pills */
 .pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
 .pill{padding:8px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;transition:.2s;min-width:44px;text-align:center}
 .pill.on{background:var(--amber);color:#0a0d14;border-color:var(--amber)}
 
-/* Metric row */
 .metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .metric{background:var(--bg3);border-radius:8px;padding:10px}
 .metric .lbl{font-size:9px;color:var(--muted);letter-spacing:.5px;font-weight:700}
 .metric .val{font-size:20px;font-weight:700;margin-top:2px}
 .metric .sub{font-size:9px;color:var(--muted);margin-top:2px}
 
-/* Input */
 .row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .row label{font-size:12px;color:var(--text);min-width:60px}
 .num-input{width:80px;padding:8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:#fff;font-size:16px;text-align:center;font-weight:700}
 
-/* Table */
 .tbl{width:100%;border-collapse:collapse;font-size:11px}
 .tbl th{text-align:left;padding:6px 8px;color:var(--muted);border-bottom:1px solid var(--border);font-size:9px;letter-spacing:.5px}
 .tbl td{padding:6px 8px;border-bottom:1px solid #111}
 .tbl .r{text-align:right;color:var(--green);font-weight:700}
 
-/* Process steps */
 .step{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
 .step-head{padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer}
 .step-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
@@ -62,19 +55,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .step-detail .n{width:18px;height:18px;border-radius:4px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--amber);font-weight:700;flex-shrink:0}
 .step-detail .t{font-size:12px;color:var(--text);line-height:1.5}
 
-/* SVG plan */
 .plan-wrap{overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg2);border-radius:10px;border:1px solid var(--border);padding:8px}
 .plan-wrap svg{display:block;min-width:500px}
 
-/* Lean info cards */
 .lean-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .lean-card{background:var(--bg3);border-radius:8px;padding:10px;border-left:3px solid var(--amber)}
 .lean-card .lbl{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.5px}
 .lean-card .val{font-size:13px;font-weight:700;color:var(--text);margin-top:2px}
 
-/* Timeline bar */
 .timeline{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:8px 0}
 .timeline div{display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700}
+
+.cat-head{padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);font-size:10px;color:var(--muted);letter-spacing:1px;font-weight:700}
+.price-row{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #111}
+.price-row.custom{background:rgba(16,185,129,.06)}
+.price-name{flex:1;min-width:0}
+.price-name .ru{font-size:11px;color:var(--text)}
+.price-name .es{font-size:9px;color:var(--muted)}
+.price-ref{font-size:9px;color:var(--muted);text-align:right;min-width:55px}
+.price-inp{width:75px;padding:6px 4px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--green);font-size:13px;text-align:center;font-weight:700;font-family:inherit}
+.price-inp::placeholder{color:#475569;font-weight:400;font-size:11px}
+.price-delta{font-size:9px;font-weight:700;min-width:35px;text-align:right}
+.store-item{padding:10px 14px;border-bottom:1px solid #111;display:flex;gap:10px;align-items:center}
+.store-item .info{flex:1}
+.store-item .sname{font-size:13px;font-weight:700;color:var(--text)}
+.store-item .sdetail{font-size:10px;color:var(--muted);margin-top:2px}
+.store-item .snotes{font-size:10px;color:var(--text);margin-top:2px;font-style:italic}
+.store-del{width:28px;height:28px;border-radius:6px;border:1px solid rgba(220,38,38,.3);background:none;color:#dc2626;font-size:14px;cursor:pointer}
+.sf-row{margin-bottom:6px}
+.sf-row label{display:block;font-size:9px;color:var(--muted);letter-spacing:.5px;margin-bottom:3px;font-weight:700}
+.sf-row input,.sf-row select{width:100%;padding:8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:13px;font-family:inherit}
+.btn-add{width:100%;padding:10px;border-radius:6px;border:none;background:var(--green);color:#0a0d14;font-weight:700;font-size:12px;cursor:pointer;letter-spacing:.5px;margin-top:6px;font-family:inherit}
+.btn-reset{padding:6px 12px;border-radius:6px;border:1px solid rgba(220,38,38,.3);background:rgba(220,38,38,.1);color:#fca5a5;font-size:10px;cursor:pointer;font-family:inherit}
+.badge{display:inline-block;background:var(--green);color:#0a0d14;font-size:8px;font-weight:700;padding:1px 4px;border-radius:8px;margin-left:2px;vertical-align:top}
 </style>
 </head>
 <body>
@@ -84,40 +97,79 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <button class="tab" onclick="showTab('plan')"><span class="ico">🏭</span>ПЛАН</button>
   <button class="tab" onclick="showTab('process')"><span class="ico">⚙️</span>ПРОЦЕСС</button>
   <button class="tab" onclick="showTab('order')"><span class="ico">📦</span>ЗАКАЗ</button>
+  <button class="tab" onclick="showTab('prices')"><span class="ico">🏪</span>ЦЕНЫ<span id="pbadge"></span></button>
 </div>
 
 <div id="calc" class="page on"></div>
 <div id="plan" class="page"></div>
 <div id="process" class="page"></div>
 <div id="order" class="page"></div>
+<div id="prices" class="page"></div>
 
 <script>
-// ══════════════════════════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════════════════════════
-const RATE = 7600;
-const OVERHEAD = 9.25;
-const DOORS = [
-  {id:"hollow",name:"Пустотелая",es:"Puerta hueca",baseMat:11.30,carpMin:114,helpMin:105,hinges:2,sell:135,range:[120,150]},
-  {id:"solid",name:"Массив средний",es:"Puerta maciza cedro",baseMat:43.60,carpMin:160,helpMin:130,hinges:2,sell:180,range:[160,200]},
-  {id:"premium",name:"Массив премиум",es:"Puerta premium",baseMat:60.20,carpMin:180,helpMin:150,hinges:2,sell:280,range:[250,350]},
-  {id:"entrance",name:"Входная массив",es:"Puerta entrada",baseMat:65.60,carpMin:210,helpMin:170,hinges:3,sell:320,range:[280,420]},
+const RATE=7600, OVERHEAD=9.25, PRIMER_DEF=7.00;
+const DOORS=[
+  {id:"hollow",name:"Пустотелая",es:"Puerta hueca",
+   bom:[{key:"plywood_4mm",qty:3.2,def:1.50},{key:"timber_euc",qty:6,def:0.40},{key:"mdf_6mm",qty:0.3,def:6.00},{key:"block_lock",qty:1,def:0.50},{key:"block_hinge",qty:2,def:0.25},{key:"glue",qty:0.15,def:4.00},{key:"consumables",qty:1,def:1.20}],
+   carpMin:114,helpMin:105,hinges:2,sell:135,range:[120,150]},
+  {id:"solid",name:"Массив средний",es:"Puerta maciza cedro",
+   bom:[{key:"cedar_board",qty:12,def:2.50},{key:"cedar_timber",qty:6,def:1.80},{key:"glue",qty:0.30,def:4.00},{key:"consumables",qty:1,def:1.80}],
+   carpMin:160,helpMin:130,hinges:2,sell:180,range:[160,200]},
+  {id:"premium",name:"Массив премиум",es:"Puerta premium",
+   bom:[{key:"ipe_board",qty:12,def:3.80},{key:"cedar_timber",qty:6,def:1.80},{key:"glue",qty:0.35,def:4.00},{key:"consumables",qty:1,def:2.20}],
+   carpMin:180,helpMin:150,hinges:2,sell:280,range:[250,350]},
+  {id:"entrance",name:"Входная массив",es:"Puerta entrada",
+   bom:[{key:"cedar_board_thick",qty:15,def:2.50},{key:"cedar_timber_w",qty:8,def:2.00},{key:"plywood_9mm",qty:1,def:7.50},{key:"glue",qty:0.40,def:4.00},{key:"consumables",qty:1,def:2.50}],
+   carpMin:210,helpMin:170,hinges:3,sell:320,range:[280,420]},
 ];
-const FINISHES = [
-  {name:"Краска белая",total:2.10},
-  {name:"Лак стандарт",total:2.50},
-  {name:"Лак нетоксичный",total:3.70},
-  {name:"Лак премиум",total:5.20},
+const FINISHES=[
+  {name:"Краска белая",primerL:0.10,coatL:0.20,coatKey:"coat_paint_w",coatDef:7.00,total:2.10},
+  {name:"Лак стандарт",primerL:0.10,coatL:0.20,coatKey:"coat_lacquer",coatDef:9.00,total:2.50},
+  {name:"Лак нетоксичный",primerL:0.10,coatL:0.20,coatKey:"coat_lacquer_nt",coatDef:15.00,total:3.70},
+  {name:"Лак премиум",primerL:0.10,coatL:0.25,coatKey:"coat_lacquer_pr",coatDef:18.00,total:5.20},
 ];
-const HARDWARE = [
-  {name:"Эконом",hinge:1.50,lock:4.00},
-  {name:"Средний",hinge:3.00,lock:7.00},
-  {name:"Премиум",hinge:5.00,lock:12.00},
+const HARDWARE=[
+  {name:"Эконом",hinge:1.50,lock:4.00,hingeKey:"hinge_eco",lockKey:"lock_eco"},
+  {name:"Средний",hinge:3.00,lock:7.00,hingeKey:"hinge_mid",lockKey:"lock_mid"},
+  {name:"Премиум",hinge:5.00,lock:12.00,hingeKey:"hinge_prem",lockKey:"lock_prem"},
 ];
-const DISCOUNTS = [{min:1,max:4,pct:0},{min:5,max:9,pct:3},{min:10,max:19,pct:6},{min:20,max:49,pct:10},{min:50,max:9999,pct:13}];
-const LABOR = {carpDay:200000,helpDay:150000,hours:8};
+const DISCOUNTS=[{min:1,max:4,pct:0},{min:5,max:9,pct:3},{min:10,max:19,pct:6},{min:20,max:49,pct:10},{min:50,max:9999,pct:13}];
+const LABOR={carpDay:200000,helpDay:150000,hours:8};
 
-const ZONES = [
+const PRICE_ITEMS=[
+  {key:"timber_euc",name:"Брус эвкалипт 50×32",es:"Listón eucalipto 50×32",unit:"м.п.",def:0.40,cat:"lumber"},
+  {key:"block_lock",name:"Блок под замок",es:"Refuerzo p/ cerradura",unit:"шт",def:0.50,cat:"lumber"},
+  {key:"block_hinge",name:"Блок под петли",es:"Refuerzo p/ bisagras",unit:"шт",def:0.25,cat:"lumber"},
+  {key:"cedar_board",name:"Доска кедр (щит)",es:"Tabla cedro (tablero)",unit:"м.п.",def:2.50,cat:"lumber"},
+  {key:"cedar_timber",name:"Брус кедр (обвязка)",es:"Listón cedro (marco)",unit:"м.п.",def:1.80,cat:"lumber"},
+  {key:"ipe_board",name:"Доска кедр/лапачо",es:"Tabla cedro/lapacho",unit:"м.п.",def:3.80,cat:"lumber"},
+  {key:"cedar_board_thick",name:"Доска кедр 45мм",es:"Tabla cedro 45mm",unit:"м.п.",def:2.50,cat:"lumber"},
+  {key:"cedar_timber_w",name:"Брус кедр усиленный",es:"Tirante cedro reforzado",unit:"м.п.",def:2.00,cat:"lumber"},
+  {key:"plywood_4mm",name:"Фанера 4мм",es:"Terciada 4mm (2440×1220)",unit:"м²",def:1.50,cat:"sheets"},
+  {key:"mdf_6mm",name:"МДФ 6мм",es:"MDF 6mm",unit:"м²",def:6.00,cat:"sheets"},
+  {key:"plywood_9mm",name:"Фанера 9мм",es:"Terciada 9mm",unit:"м²",def:7.50,cat:"sheets"},
+  {key:"glue",name:"Клей ПВА",es:"Cola de carpintero (PVA)",unit:"кг",def:4.00,cat:"paint"},
+  {key:"primer",name:"Грунт по дереву",es:"Sellador para madera",unit:"л",def:7.00,cat:"paint"},
+  {key:"coat_paint_w",name:"Краска белая",es:"Esmalte sintético blanco",unit:"л",def:7.00,cat:"paint"},
+  {key:"coat_lacquer",name:"Лак стандарт",es:"Barniz estándar",unit:"л",def:9.00,cat:"paint"},
+  {key:"coat_lacquer_nt",name:"Лак нетоксичный",es:"Barniz al agua (no tóxico)",unit:"л",def:15.00,cat:"paint"},
+  {key:"coat_lacquer_pr",name:"Лак премиум",es:"Laca poliuretánica",unit:"л",def:18.00,cat:"paint"},
+  {key:"hinge_eco",name:"Петли эконом",es:"Bisagra común (par)",unit:"пар",def:1.50,cat:"hardware"},
+  {key:"hinge_mid",name:"Петли средние",es:"Bisagra reforzada (par)",unit:"пар",def:3.00,cat:"hardware"},
+  {key:"hinge_prem",name:"Петли премиум",es:"Bisagra acero inox. (par)",unit:"пар",def:5.00,cat:"hardware"},
+  {key:"lock_eco",name:"Замок + ручка эконом",es:"Picaporte económico",unit:"шт",def:4.00,cat:"hardware"},
+  {key:"lock_mid",name:"Замок + ручка средний",es:"Cerradura + manija",unit:"шт",def:7.00,cat:"hardware"},
+  {key:"lock_prem",name:"Замок + ручка премиум",es:"Cerradura seguridad + manija",unit:"шт",def:12.00,cat:"hardware"},
+  {key:"consumables",name:"Шурупы, наждак",es:"Tornillos, lija (kit)",unit:"компл",def:1.20,cat:"hardware"},
+];
+const STORE_CATS=[
+  {id:"lumber",name:"Пиломатериалы",es:"Maderería",icon:"🪵"},
+  {id:"sheets",name:"Листовые",es:"Tableros",icon:"📐"},
+  {id:"paint",name:"ЛКМ",es:"Pinturas y lacas",icon:"🎨"},
+  {id:"hardware",name:"Фурнитура",es:"Herrajes",icon:"🔩"},
+];
+
+const ZONES=[
   {label:"СУШИЛЬНАЯ\nКАМЕРА",sub:"12м² 50-65°C",x:2,y:2,w:14,h:12,color:"#7c3aed",border:"#7c3aed",step:0},
   {label:"ЗОНА\nСБОРКИ",sub:"Верстаки\nСтрубцины",x:40,y:2,w:20,h:20,color:"#166534",border:"#16a34a",step:4},
   {label:"ФРЕЗЕРНЫЙ\nСТОЛ",sub:"Robland T-120",x:62,y:2,w:14,h:14,color:"#b45309",border:"#d97706",step:3},
@@ -131,12 +183,12 @@ const ZONES = [
   {label:"СКЛАД\nГОТОВЫХ",sub:"Отгрузка",x:16,y:44,w:22,h:10,color:"#065f46",border:"#10b981",step:0},
   {label:"СКЛАД\nСЫРЬЯ",sub:"Фанера, брус",x:46,y:44,w:28,h:10,color:"#78350f",border:"#d97706",step:0},
 ];
-const ARROWS = [
+const ARROWS=[
   {x1:60,y1:46,x2:66,y2:42},{x1:69,y1:34,x2:69,y2:32},{x1:69,y1:18,x2:69,y2:16},
   {x1:62,y1:9,x2:60,y2:10},{x1:40,y1:22,x2:38,y2:22},{x1:20,y1:24,x2:18,y2:24},
   {x1:8,y1:32,x2:8,y2:34},{x1:12,y1:42,x2:18,y2:46},
 ];
-const STEPS = [
+const STEPS=[
   {n:1,title:"РАСКРОЙ",machine:"Форматник MIDAS",time:"20-30 мин",color:"#dc2626",
    details:["Фанера 4мм → 2000×800мм (2 шт)","МДФ 6мм → рёбра 800×60мм (6-8 шт)","Брус 50×32 → рамка по периметру","Точность ±0.5мм"]},
   {n:2,title:"КАЛИБРОВКА",machine:"Фуганок + Рейсмус Lebeniste",time:"15-20 мин",color:"#1d4ed8",
@@ -151,43 +203,51 @@ const STEPS = [
    details:["Грунт 1 слой → сушка 30-40 мин","Шлифовка 220","Лак слой 1 → сушка 40-60 мин","Лак слой 2 → сушка 4-6 ч","Петли + замок по шаблону"]},
 ];
 
-// ══════════════════════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════════════════════
-let st = {doorIdx:0,finIdx:1,hwIdx:0,qty:10,rate:RATE};
+let customPrices={}, stores=[];
+try{customPrices=JSON.parse(localStorage.getItem('doorFactory_pricesGs'))||{};}catch{}
+try{stores=JSON.parse(localStorage.getItem('doorFactory_stores'))||[];}catch{}
+
+let st={doorIdx:0,finIdx:1,hwIdx:0,qty:10,rate:RATE};
 
 function gs(usd){return Math.round(usd*st.rate)}
 function fGs(n){return Math.round(n).toLocaleString('es-PY')}
 function fUsd(n){return n.toFixed(2)}
-function getDiscount(qty){return (DISCOUNTS.find(d=>qty>=d.min&&qty<=d.max)||DISCOUNTS[0]).pct}
+function getDiscount(qty){return(DISCOUNTS.find(d=>qty>=d.min&&qty<=d.max)||DISCOUNTS[0]).pct}
+function gp(key,def){return customPrices[key]!==undefined?customPrices[key]/st.rate:def}
 
 function calcDoor(){
   const d=DOORS[st.doorIdx],f=FINISHES[st.finIdx],hw=HARDWARE[st.hwIdx];
-  const mat=d.baseMat+f.total+hw.hinge*d.hinges+hw.lock;
-  const carpHr=LABOR.carpDay/LABOR.hours, helpHr=LABOR.helpDay/LABOR.hours;
+  let mat=0;
+  d.bom.forEach(m=>{mat+=m.qty*gp(m.key,m.def)});
+  const pp=gp('primer',PRIMER_DEF),cp=gp(f.coatKey,f.coatDef);
+  mat+=f.primerL*pp+f.coatL*cp;
+  mat+=gp(hw.hingeKey,hw.hinge)*d.hinges+gp(hw.lockKey,hw.lock);
+  const carpHr=LABOR.carpDay/LABOR.hours,helpHr=LABOR.helpDay/LABOR.hours;
   const laborGs=(d.carpMin/60)*carpHr+(d.helpMin/60)*helpHr;
   const laborUsd=laborGs/st.rate;
   const cost=mat+laborUsd+OVERHEAD;
-  return {mat,laborGs,laborUsd,cost,sell:d.sell,margin:Math.round(((d.sell-cost)/d.sell)*100)};
+  return{mat,laborGs,laborUsd,cost,sell:d.sell,margin:Math.round(((d.sell-cost)/d.sell)*100)};
 }
 
-// ══════════════════════════════════════════════════════════════
-// TAB SWITCHING
-// ══════════════════════════════════════════════════════════════
+function updateBadge(){
+  const n=Object.keys(customPrices).length;
+  document.getElementById('pbadge').innerHTML=n?`<span class="badge">${n}</span>`:'';
+}
+
 function showTab(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.getElementById(id).classList.add('on');
-  document.querySelectorAll('.tab').forEach(t=>{if(t.textContent.trim().includes(
-    id==='calc'?'РАСЧЁТ':id==='plan'?'ПЛАН':id==='process'?'ПРОЦЕСС':'ЗАКАЗ'
-  ))t.classList.add('on')});
+  const labels={calc:'РАСЧЁТ',plan:'ПЛАН',process:'ПРОЦЕСС',order:'ЗАКАЗ',prices:'ЦЕНЫ'};
+  document.querySelectorAll('.tab').forEach(t=>{if(t.textContent.trim().includes(labels[id]))t.classList.add('on')});
+  if(id==='calc')renderCalc();
+  if(id==='order')renderOrder();
+  if(id==='prices')renderPrices();
 }
 
-// ══════════════════════════════════════════════════════════════
-// RENDER: CALCULATOR
-// ══════════════════════════════════════════════════════════════
 function renderCalc(){
-  const c=calcDoor(), d=DOORS[st.doorIdx];
+  const c=calcDoor(),d=DOORS[st.doorIdx];
+  const hasC=Object.keys(customPrices).length>0;
   document.getElementById('calc').innerHTML=`
     <div class="card">
       <div class="card-title">ТИП ДВЕРИ</div>
@@ -197,24 +257,22 @@ function renderCalc(){
       <div class="card-title">ФУРНИТУРА</div>
       <div class="pills">${HARDWARE.map((h,i)=>`<div class="pill${i===st.hwIdx?' on':''}" onclick="st.hwIdx=${i};renderCalc()">${h.name}</div>`).join('')}</div>
     </div>
-
+    ${hasC?'<div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:10px;color:#6ee7b7">Цены из магазинов учтены в расчёте</div>':''}
     <div class="metrics">
-      <div class="metric"><div class="lbl">СЕБЕСТОИМОСТЬ</div><div class="val" style="color:${c.cost<80?'var(--green)':'var(--amber)'}">$${fUsd(c.cost)}</div><div class="sub">${fGs(gs(c.cost))} ₲</div></div>
-      <div class="metric"><div class="lbl">ЦЕНА ПРОДАЖИ</div><div class="val" style="color:var(--green)">$${c.sell}</div><div class="sub">${fGs(gs(c.sell))} ₲ (${d.range[0]}-${d.range[1]})</div></div>
-      <div class="metric"><div class="lbl">ПРИБЫЛЬ</div><div class="val" style="color:var(--amber)">$${fUsd(c.sell-c.cost)}</div><div class="sub">${fGs(gs(c.sell-c.cost))} ₲</div></div>
+      <div class="metric"><div class="lbl">СЕБЕСТОИМОСТЬ</div><div class="val" style="color:${c.cost<80?'var(--green)':'var(--amber)'}">₲${fGs(gs(c.cost))}</div><div class="sub">$${fUsd(c.cost)}</div></div>
+      <div class="metric"><div class="lbl">ЦЕНА ПРОДАЖИ</div><div class="val" style="color:var(--green)">₲${fGs(gs(c.sell))}</div><div class="sub">$${c.sell} (${d.range[0]}-${d.range[1]})</div></div>
+      <div class="metric"><div class="lbl">ПРИБЫЛЬ</div><div class="val" style="color:var(--amber)">₲${fGs(gs(c.sell-c.cost))}</div><div class="sub">$${fUsd(c.sell-c.cost)}</div></div>
       <div class="metric"><div class="lbl">МАРЖА</div><div class="val" style="color:var(--purple)">${c.margin}%</div><div class="sub">${d.es}</div></div>
     </div>
-
     <div class="card">
       <div class="card-title">СТРУКТУРА СЕБЕСТОИМОСТИ</div>
       <table class="tbl">
-        <tr><td>Материалы</td><td class="r">$${fUsd(c.mat)}</td></tr>
-        <tr><td>Труд (мастер+подсобник)</td><td class="r">${fGs(c.laborGs)} ₲ ($${fUsd(c.laborUsd)})</td></tr>
-        <tr><td>Накладные</td><td class="r">$${fUsd(OVERHEAD)}</td></tr>
-        <tr style="font-weight:700;border-top:2px solid var(--border)"><td>ИТОГО</td><td class="r" style="font-size:14px">$${fUsd(c.cost)}</td></tr>
+        <tr><td>Материалы</td><td class="r">₲${fGs(gs(c.mat))} ($${fUsd(c.mat)})</td></tr>
+        <tr><td>Труд (мастер+подсобник)</td><td class="r">₲${fGs(c.laborGs)} ($${fUsd(c.laborUsd)})</td></tr>
+        <tr><td>Накладные</td><td class="r">₲${fGs(gs(OVERHEAD))} ($${fUsd(OVERHEAD)})</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--border)"><td>ИТОГО</td><td class="r" style="font-size:14px">₲${fGs(gs(c.cost))}</td></tr>
       </table>
     </div>
-
     <div class="card">
       <div class="card-title">КУРС ₲/$</div>
       <div class="row">
@@ -224,18 +282,14 @@ function renderCalc(){
     </div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// RENDER: ORDER
-// ══════════════════════════════════════════════════════════════
 function renderOrder(){
-  const c=calcDoor(), d=DOORS[st.doorIdx];
+  const c=calcDoor(),d=DOORS[st.doorIdx];
   const disc=getDiscount(st.qty);
   const unitPrice=c.sell*(1-disc/100);
   const total=unitPrice*st.qty;
   const prepay=total*0.5;
   const profit=(unitPrice-c.cost)*st.qty;
   const days=Math.ceil(st.qty/5.5)+1;
-
   document.getElementById('order').innerHTML=`
     <div class="card">
       <div class="card-title">БЫСТРЫЙ РАСЧЁТ ЗАКАЗА — ${d.name.toUpperCase()}</div>
@@ -245,14 +299,12 @@ function renderOrder(){
         <span style="font-size:11px;color:var(--muted)">дверей</span>
       </div>
     </div>
-
     <div class="metrics">
-      <div class="metric"><div class="lbl">ЦЕНА ЗА ШТ</div><div class="val" style="color:var(--green)">$${fUsd(unitPrice)}</div><div class="sub">${disc?'-'+disc+'% скидка':'без скидки'}</div></div>
-      <div class="metric"><div class="lbl">ИТОГО ЗАКАЗ</div><div class="val" style="color:var(--amber)">$${fUsd(total)}</div><div class="sub">${fGs(gs(total))} ₲</div></div>
-      <div class="metric"><div class="lbl">ПРЕДОПЛАТА 50%</div><div class="val" style="color:var(--blue)">$${fUsd(prepay)}</div><div class="sub">${fGs(gs(prepay))} ₲</div></div>
-      <div class="metric"><div class="lbl">ПРИБЫЛЬ</div><div class="val" style="color:var(--green)">$${fUsd(profit)}</div><div class="sub">${fGs(gs(profit))} ₲</div></div>
+      <div class="metric"><div class="lbl">ЦЕНА ЗА ШТ</div><div class="val" style="color:var(--green)">₲${fGs(gs(unitPrice))}</div><div class="sub">${disc?'-'+disc+'% скидка':'без скидки'}</div></div>
+      <div class="metric"><div class="lbl">ИТОГО ЗАКАЗ</div><div class="val" style="color:var(--amber)">₲${fGs(gs(total))}</div><div class="sub">$${fUsd(total)}</div></div>
+      <div class="metric"><div class="lbl">ПРЕДОПЛАТА 50%</div><div class="val" style="color:var(--blue)">₲${fGs(gs(prepay))}</div><div class="sub">$${fUsd(prepay)}</div></div>
+      <div class="metric"><div class="lbl">ПРИБЫЛЬ</div><div class="val" style="color:var(--green)">₲${fGs(gs(profit))}</div><div class="sub">$${fUsd(profit)}</div></div>
     </div>
-
     <div class="card">
       <div class="card-title">УСЛОВИЯ</div>
       <table class="tbl">
@@ -262,74 +314,40 @@ function renderOrder(){
         <tr><td>Скидка</td><td class="r">${disc}% (от ${DISCOUNTS.find(x=>x.pct===disc).min} шт)</td></tr>
       </table>
     </div>
-
     <div class="card">
       <div class="card-title">ШКАЛА СКИДОК</div>
       <table class="tbl">
         <tr><th>Кол-во</th><th>Скидка</th><th>Цена/шт</th></tr>
-        ${DISCOUNTS.map(x=>{
-          const p=c.sell*(1-x.pct/100);
-          return `<tr${x.pct===disc?' style="color:var(--amber);font-weight:700"':''}><td>${x.min}${x.max>999?'+':'-'+x.max}</td><td>${x.pct}%</td><td class="r">$${fUsd(p)}</td></tr>`;
-        }).join('')}
+        ${DISCOUNTS.map(x=>{const p=c.sell*(1-x.pct/100);return`<tr${x.pct===disc?' style="color:var(--amber);font-weight:700"':''}><td>${x.min}${x.max>999?'+':'-'+x.max}</td><td>${x.pct}%</td><td class="r">₲${fGs(gs(p))}</td></tr>`}).join('')}
       </table>
     </div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// RENDER: PLAN (SVG)
-// ══════════════════════════════════════════════════════════════
 function renderPlan(){
   const GW=90,GH=56,S=6;
   const W=GW*S+30,H=GH*S+30;
   let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">`;
-
-  // Grid
   for(let i=0;i<=GW;i++) svg+=`<line x1="${15+i*S}" y1="15" x2="${15+i*S}" y2="${15+GH*S}" stroke="#1e293b" stroke-width=".4"/>`;
   for(let i=0;i<=GH;i++) svg+=`<line x1="15" y1="${15+i*S}" x2="${15+GW*S}" y2="${15+i*S}" stroke="#1e293b" stroke-width=".4"/>`;
-
-  // Walls
   svg+=`<rect x="15" y="15" width="${GW*S}" height="${GH*S}" fill="none" stroke="#475569" stroke-width="2.5" rx="2"/>`;
-
-  // Gate
   svg+=`<rect x="${15+40*S}" y="${15+GH*S-2}" width="${8*S}" height="4" fill="#0a0d14"/>`;
   svg+=`<text x="${15+44*S}" y="${15+GH*S+10}" text-anchor="middle" fill="#64748b" font-size="7" font-weight="700">ВОРОТА</text>`;
-
-  // Zone separator
   svg+=`<line x1="${15+40*S}" y1="${15+15*S}" x2="${15+40*S}" y2="${15+42*S}" stroke="#334155" stroke-width=".8" stroke-dasharray="5,3"/>`;
   svg+=`<text x="${15+19*S}" y="${15+43*S}" text-anchor="middle" fill="#334155" font-size="6" letter-spacing="1">ПОДСОБНИК</text>`;
   svg+=`<text x="${15+70*S}" y="${15+43*S}" text-anchor="middle" fill="#334155" font-size="6" letter-spacing="1">СТОЛЯР</text>`;
   svg+=`<text x="${15+39*S}" y="${15+14*S}" text-anchor="middle" fill="#f59e0b" font-size="6" font-weight="700">ПЕРЕДАЧА</text>`;
-
-  // Zones
   ZONES.forEach(z=>{
     svg+=`<rect x="${15+z.x*S}" y="${15+z.y*S}" width="${z.w*S}" height="${z.h*S}" fill="${z.border}" fill-opacity=".12" stroke="${z.border}" stroke-width="1.2" ${z.step?'':'stroke-dasharray="3,2"'} rx="3"/>`;
-    if(z.step){
-      svg+=`<circle cx="${15+z.x*S+10}" cy="${15+z.y*S+10}" r="7" fill="${z.color}"/>`;
-      svg+=`<text x="${15+z.x*S+10}" y="${15+z.y*S+14}" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">${z.step}</text>`;
-    }
-    const cx=15+(z.x+z.w/2)*S, cy=15+(z.y+z.h/2)*S;
-    z.label.split('\n').forEach((l,i)=>{
-      svg+=`<text x="${cx}" y="${cy-6+i*11}" text-anchor="middle" fill="${z.border}" font-size="7.5" font-weight="700">${l}</text>`;
-    });
-    if(z.sub){
-      z.sub.split('\n').forEach((l,i)=>{
-        svg+=`<text x="${cx}" y="${cy+12+i*9}" text-anchor="middle" fill="#94a3b8" font-size="6">${l}</text>`;
-      });
-    }
+    if(z.step){svg+=`<circle cx="${15+z.x*S+10}" cy="${15+z.y*S+10}" r="7" fill="${z.color}"/>`;svg+=`<text x="${15+z.x*S+10}" y="${15+z.y*S+14}" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">${z.step}</text>`}
+    const cx=15+(z.x+z.w/2)*S,cy=15+(z.y+z.h/2)*S;
+    z.label.split('\n').forEach((l,i)=>{svg+=`<text x="${cx}" y="${cy-6+i*11}" text-anchor="middle" fill="${z.border}" font-size="7.5" font-weight="700">${l}</text>`});
+    if(z.sub){z.sub.split('\n').forEach((l,i)=>{svg+=`<text x="${cx}" y="${cy+12+i*9}" text-anchor="middle" fill="#94a3b8" font-size="6">${l}</text>`})}
   });
-
-  // Arrows
   svg+=`<defs><marker id="arr" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#f59e0b"/></marker></defs>`;
-  ARROWS.forEach(a=>{
-    svg+=`<line x1="${15+a.x1*S}" y1="${15+a.y1*S}" x2="${15+a.x2*S}" y2="${15+a.y2*S}" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr)"/>`;
-  });
-
-  // Dimensions
+  ARROWS.forEach(a=>{svg+=`<line x1="${15+a.x1*S}" y1="${15+a.y1*S}" x2="${15+a.x2*S}" y2="${15+a.y2*S}" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr)"/>`});
   svg+=`<text x="${15+GW*S/2}" y="11" text-anchor="middle" fill="#475569" font-size="8">14 м</text>`;
   svg+=`<text x="8" y="${15+GH*S/2}" text-anchor="middle" fill="#475569" font-size="8" transform="rotate(-90,8,${15+GH*S/2})">10 м</text>`;
-
   svg+=`</svg>`;
-
   document.getElementById('plan').innerHTML=`
     <div class="lean-cards">
       <div class="lean-card"><div class="lbl">ПЛОЩАДЬ</div><div class="val">140 м²</div></div>
@@ -364,9 +382,6 @@ function renderPlan(){
     </div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// RENDER: PROCESS
-// ══════════════════════════════════════════════════════════════
 function renderProcess(){
   document.getElementById('process').innerHTML=`
     <div class="card" style="display:flex;gap:16px;flex-wrap:wrap">
@@ -392,18 +407,14 @@ function renderProcess(){
       <div class="step" onclick="this.classList.toggle('open')">
         <div class="step-head">
           <div class="step-num" style="background:${s.color}">${s.n}</div>
-          <div class="step-info">
-            <div class="step-title">${s.title}</div>
-            <div class="step-machine">${s.machine}</div>
-          </div>
+          <div class="step-info"><div class="step-title">${s.title}</div><div class="step-machine">${s.machine}</div></div>
           <div class="step-time">${s.time}</div>
         </div>
         <div class="step-body">
           <div style="height:1px;background:${s.color};opacity:.2;margin-bottom:10px"></div>
           ${s.details.map((d,i)=>`<div class="step-detail"><div class="n">${i+1}</div><div class="t">${d}</div></div>`).join('')}
         </div>
-      </div>
-    `).join('')}
+      </div>`).join('')}
     <div class="card">
       <div class="card-title">РОЛИ В КОНВЕЙЕРЕ</div>
       <table class="tbl">
@@ -414,13 +425,90 @@ function renderProcess(){
     </div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════════════
-renderCalc();
-renderPlan();
-renderProcess();
-renderOrder();
+function savePrice(key,val){
+  if(val===''||isNaN(parseFloat(val))) delete customPrices[key];
+  else customPrices[key]=parseFloat(val);
+  try{localStorage.setItem('doorFactory_pricesGs',JSON.stringify(customPrices))}catch{}
+  updateBadge();
+}
+function resetPrices(){
+  customPrices={};
+  try{localStorage.setItem('doorFactory_pricesGs','{}')}catch{}
+  updateBadge();renderPrices();
+}
+function addStore(){
+  const n=document.getElementById('sf-name'),c=document.getElementById('sf-cat'),
+        p=document.getElementById('sf-phone'),a=document.getElementById('sf-addr'),
+        t=document.getElementById('sf-notes');
+  if(!n.value.trim())return;
+  stores.push({id:Date.now(),name:n.value.trim(),cat:c.value,phone:p.value.trim(),address:a.value.trim(),notes:t.value.trim()});
+  try{localStorage.setItem('doorFactory_stores',JSON.stringify(stores))}catch{}
+  n.value='';p.value='';a.value='';t.value='';
+  renderPrices();
+}
+function deleteStore(id){
+  stores=stores.filter(s=>s.id!==id);
+  try{localStorage.setItem('doorFactory_stores',JSON.stringify(stores))}catch{}
+  renderPrices();
+}
+
+function renderPrices(){
+  const r=st.rate,nc=Object.keys(customPrices).length;
+  let h='';
+
+  if(nc>0) h+=`<div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:10px 12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:#6ee7b7">Введено ${nc} цен — расчёт обновлён</span><button class="btn-reset" onclick="resetPrices()">Сбросить</button></div>`;
+
+  STORE_CATS.forEach(cat=>{
+    const items=PRICE_ITEMS.filter(p=>p.cat===cat.id);
+    h+=`<div class="card" style="padding:0;overflow:hidden;margin-bottom:12px">`;
+    h+=`<div class="cat-head">${cat.icon} ${cat.name.toUpperCase()} — ${cat.es}</div>`;
+    items.forEach(item=>{
+      const cv=customPrices[item.key];
+      const hasC=cv!==undefined;
+      const defGs=Math.round(item.def*r);
+      const delta=hasC?((cv-defGs)/defGs*100):0;
+      const dColor=delta>0?'var(--red)':delta<0?'var(--green)':'var(--muted)';
+      h+=`<div class="price-row${hasC?' custom':''}">`;
+      h+=`<div class="price-name"><div class="ru">${item.name}</div><div class="es">${item.es}</div></div>`;
+      h+=`<div class="price-ref">₲${fGs(defGs)}<br><span style="font-size:8px">$${fUsd(item.def)}/${item.unit}</span></div>`;
+      h+=`<input class="price-inp" type="number" step="100" min="0" placeholder="${fGs(defGs)}" value="${hasC?cv:''}" onchange="savePrice('${item.key}',this.value);renderPrices()">`;
+      h+=`<div class="price-delta" style="color:${dColor}">${hasC?(delta>0?'+':'')+delta.toFixed(0)+'%':'—'}</div>`;
+      h+=`</div>`;
+    });
+    h+=`</div>`;
+  });
+
+  h+=`<div style="height:1px;background:var(--border);margin:16px 0"></div>`;
+  h+=`<div class="card">`;
+  h+=`<div class="card-title">ДОБАВИТЬ МАГАЗИН / ПОСТАВЩИКА</div>`;
+  h+=`<div class="sf-row"><label>НАЗВАНИЕ</label><input id="sf-name" placeholder="Carpicenter Norte"></div>`;
+  h+=`<div class="sf-row"><label>КАТЕГОРИЯ</label><select id="sf-cat">${STORE_CATS.map(c=>`<option value="${c.id}">${c.icon} ${c.name}</option>`).join('')}</select></div>`;
+  h+=`<div style="display:flex;gap:6px"><div class="sf-row" style="flex:1"><label>ТЕЛЕФОН</label><input id="sf-phone" placeholder="+595 ..."></div>`;
+  h+=`<div class="sf-row" style="flex:1"><label>АДРЕС</label><input id="sf-addr" placeholder="Ruta 2, km 30"></div></div>`;
+  h+=`<div class="sf-row"><label>ЗАМЕТКИ</label><input id="sf-notes" placeholder="Скидка 10% от 50 листов, factura"></div>`;
+  h+=`<button class="btn-add" onclick="addStore()">+ ДОБАВИТЬ</button>`;
+  h+=`</div>`;
+
+  STORE_CATS.forEach(cat=>{
+    const cs=stores.filter(s=>s.cat===cat.id);
+    if(!cs.length)return;
+    h+=`<div class="card" style="padding:0;overflow:hidden;margin-bottom:12px">`;
+    h+=`<div class="cat-head">${cat.icon} ${cat.name.toUpperCase()} — ${cat.es} (${cs.length})</div>`;
+    cs.forEach(s=>{
+      h+=`<div class="store-item"><div class="info"><div class="sname">${s.name}</div>`;
+      if(s.phone||s.address) h+=`<div class="sdetail">${s.phone?'tel: '+s.phone+' ':''}${s.address||''}</div>`;
+      if(s.notes) h+=`<div class="snotes">${s.notes}</div>`;
+      h+=`</div><button class="store-del" onclick="deleteStore(${s.id})">✕</button></div>`;
+    });
+    h+=`</div>`;
+  });
+
+  if(!stores.length) h+=`<div class="card" style="text-align:center;color:var(--muted);font-size:12px;padding:24px 14px">Пока нет магазинов.<br>Добавьте после визита.</div>`;
+
+  document.getElementById('prices').innerHTML=h;
+}
+
+renderCalc();renderPlan();renderProcess();renderOrder();updateBadge();
 </script>
 </body>
 </html>
