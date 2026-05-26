@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0a0d14">
+<title>Puertas PY</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0d14;color:#e2e8f0;overflow-x:hidden;padding-bottom:64px}
+:root{--green:#10b981;--amber:#f59e0b;--red:#dc2626;--blue:#3b82f6;--purple:#8b5cf6;--pink:#ec4899;--bg2:#141821;--bg3:#1a1f2e;--border:#1e293b;--muted:#64748b;--text:#cbd5e1}
+
+/* Bottom tabs */
+.tabs{position:fixed;bottom:0;left:0;right:0;display:flex;background:#0a0d14;border-top:2px solid var(--border);z-index:100;padding:4px 0 env(safe-area-inset-bottom,4px)}
+.tab{flex:1;padding:10px 4px 8px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.5px;color:var(--muted);border:none;background:none;cursor:pointer;transition:.2s}
+.tab.on{color:var(--amber)}
+.tab .ico{font-size:20px;display:block;margin-bottom:2px}
+.page{display:none;padding:16px}
+.page.on{display:block}
+
+/* Cards */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
+.card-title{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;font-weight:700}
+
+/* Selector pills */
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.pill{padding:8px 12px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-size:12px;font-weight:600;cursor:pointer;transition:.2s;min-width:44px;text-align:center}
+.pill.on{background:var(--amber);color:#0a0d14;border-color:var(--amber)}
+
+/* Metric row */
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.metric{background:var(--bg3);border-radius:8px;padding:10px}
+.metric .lbl{font-size:9px;color:var(--muted);letter-spacing:.5px;font-weight:700}
+.metric .val{font-size:20px;font-weight:700;margin-top:2px}
+.metric .sub{font-size:9px;color:var(--muted);margin-top:2px}
+
+/* Input */
+.row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.row label{font-size:12px;color:var(--text);min-width:60px}
+.num-input{width:80px;padding:8px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:#fff;font-size:16px;text-align:center;font-weight:700}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:11px}
+.tbl th{text-align:left;padding:6px 8px;color:var(--muted);border-bottom:1px solid var(--border);font-size:9px;letter-spacing:.5px}
+.tbl td{padding:6px 8px;border-bottom:1px solid #111}
+.tbl .r{text-align:right;color:var(--green);font-weight:700}
+
+/* Process steps */
+.step{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.step-head{padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.step-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0}
+.step-info{flex:1}
+.step-title{font-size:13px;font-weight:700;letter-spacing:.5px}
+.step-machine{font-size:10px;color:var(--muted)}
+.step-time{font-size:10px;color:var(--muted);background:var(--bg3);padding:4px 8px;border-radius:4px;white-space:nowrap}
+.step-body{padding:0 14px 14px;display:none}
+.step.open .step-body{display:block}
+.step.open{border-color:var(--amber)}
+.step-detail{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px}
+.step-detail .n{width:18px;height:18px;border-radius:4px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--amber);font-weight:700;flex-shrink:0}
+.step-detail .t{font-size:12px;color:var(--text);line-height:1.5}
+
+/* SVG plan */
+.plan-wrap{overflow:auto;-webkit-overflow-scrolling:touch;background:var(--bg2);border-radius:10px;border:1px solid var(--border);padding:8px}
+.plan-wrap svg{display:block;min-width:500px}
+
+/* Lean info cards */
+.lean-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.lean-card{background:var(--bg3);border-radius:8px;padding:10px;border-left:3px solid var(--amber)}
+.lean-card .lbl{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.5px}
+.lean-card .val{font-size:13px;font-weight:700;color:var(--text);margin-top:2px}
+
+/* Timeline bar */
+.timeline{display:flex;height:28px;border-radius:6px;overflow:hidden;margin:8px 0}
+.timeline div{display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="tab on" onclick="showTab('calc')"><span class="ico">🧮</span>РАСЧЁТ</button>
+  <button class="tab" onclick="showTab('plan')"><span class="ico">🏭</span>ПЛАН</button>
+  <button class="tab" onclick="showTab('process')"><span class="ico">⚙️</span>ПРОЦЕСС</button>
+  <button class="tab" onclick="showTab('order')"><span class="ico">📦</span>ЗАКАЗ</button>
+</div>
+
+<div id="calc" class="page on"></div>
+<div id="plan" class="page"></div>
+<div id="process" class="page"></div>
+<div id="order" class="page"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════
+const RATE = 7600;
+const OVERHEAD = 9.25;
+const DOORS = [
+  {id:"hollow",name:"Пустотелая",es:"Puerta hueca",baseMat:11.30,carpMin:114,helpMin:105,hinges:2,sell:135,range:[120,150]},
+  {id:"solid",name:"Массив средний",es:"Puerta maciza cedro",baseMat:43.60,carpMin:160,helpMin:130,hinges:2,sell:180,range:[160,200]},
+  {id:"premium",name:"Массив премиум",es:"Puerta premium",baseMat:60.20,carpMin:180,helpMin:150,hinges:2,sell:280,range:[250,350]},
+  {id:"entrance",name:"Входная массив",es:"Puerta entrada",baseMat:65.60,carpMin:210,helpMin:170,hinges:3,sell:320,range:[280,420]},
+];
+const FINISHES = [
+  {name:"Краска белая",total:2.10},
+  {name:"Лак стандарт",total:2.50},
+  {name:"Лак нетоксичный",total:3.70},
+  {name:"Лак премиум",total:5.20},
+];
+const HARDWARE = [
+  {name:"Эконом",hinge:1.50,lock:4.00},
+  {name:"Средний",hinge:3.00,lock:7.00},
+  {name:"Премиум",hinge:5.00,lock:12.00},
+];
+const DISCOUNTS = [{min:1,max:4,pct:0},{min:5,max:9,pct:3},{min:10,max:19,pct:6},{min:20,max:49,pct:10},{min:50,max:9999,pct:13}];
+const LABOR = {carpDay:200000,helpDay:150000,hours:8};
+
+const ZONES = [
+  {label:"СУШИЛЬНАЯ\nКАМЕРА",sub:"12м² 50-65°C",x:2,y:2,w:14,h:12,color:"#7c3aed",border:"#7c3aed",step:0},
+  {label:"ЗОНА\nСБОРКИ",sub:"Верстаки\nСтрубцины",x:40,y:2,w:20,h:20,color:"#166534",border:"#16a34a",step:4},
+  {label:"ФРЕЗЕРНЫЙ\nСТОЛ",sub:"Robland T-120",x:62,y:2,w:14,h:14,color:"#b45309",border:"#d97706",step:3},
+  {label:"АСПИРАЦИЯ",sub:"Rolf-Mann",x:78,y:2,w:10,h:16,color:"#0891b2",border:"#0891b2",step:0},
+  {label:"ЗОНА\nПОКРАСКИ",sub:"Краскопульт\nИЗОЛИРОВАНА",x:2,y:16,w:16,h:16,color:"#be185d",border:"#ec4899",step:6},
+  {label:"ШЛИФОВКА",sub:"80→120→180→220",x:20,y:16,w:18,h:14,color:"#92400e",border:"#f59e0b",step:5},
+  {label:"ФУГАНОК +\nРЕЙСМУС",sub:"Lebeniste",x:62,y:18,w:14,h:14,color:"#1d4ed8",border:"#1d4ed8",step:2},
+  {label:"ЛЕНТОЧНАЯ\nПИЛА",sub:"",x:78,y:20,w:10,h:14,color:"#374151",border:"#6b7280",step:0},
+  {label:"СТЕЛЛАЖ\nСУШКИ",sub:"5-6 дверей",x:2,y:34,w:14,h:8,color:"#059669",border:"#10b981",step:0},
+  {label:"ФОРМАТНИК\nMIDAS",sub:"Раскрой",x:62,y:34,w:16,h:10,color:"#dc2626",border:"#dc2626",step:1},
+  {label:"СКЛАД\nГОТОВЫХ",sub:"Отгрузка",x:16,y:44,w:22,h:10,color:"#065f46",border:"#10b981",step:0},
+  {label:"СКЛАД\nСЫРЬЯ",sub:"Фанера, брус",x:46,y:44,w:28,h:10,color:"#78350f",border:"#d97706",step:0},
+];
+const ARROWS = [
+  {x1:60,y1:46,x2:66,y2:42},{x1:69,y1:34,x2:69,y2:32},{x1:69,y1:18,x2:69,y2:16},
+  {x1:62,y1:9,x2:60,y2:10},{x1:40,y1:22,x2:38,y2:22},{x1:20,y1:24,x2:18,y2:24},
+  {x1:8,y1:32,x2:8,y2:34},{x1:12,y1:42,x2:18,y2:46},
+];
+const STEPS = [
+  {n:1,title:"РАСКРОЙ",machine:"Форматник MIDAS",time:"20-30 мин",color:"#dc2626",
+   details:["Фанера 4мм → 2000×800мм (2 шт)","МДФ 6мм → рёбра 800×60мм (6-8 шт)","Брус 50×32 → рамка по периметру","Точность ±0.5мм"]},
+  {n:2,title:"КАЛИБРОВКА",machine:"Фуганок + Рейсмус Lebeniste",time:"15-20 мин",color:"#1d4ed8",
+   details:["Фуганок → базовая плоскость","Рейсмус → 50×32мм ±0.2мм","Влагомер → ≤14%","Отбраковка сучков, трещин"]},
+  {n:3,title:"ФРЕЗЕРОВКА",machine:"Robland T-120",time:"20-25 мин",color:"#b45309",
+   details:["Четверть 10×10мм по периметру","Шипы и пазы (30×15×10мм)","6.000 об/мин","Микрорегулировка ±0.1мм"]},
+  {n:4,title:"СБОРКА",machine:"Верстак, струбцины",time:"40-60 мин + 60 мин клей",color:"#166534",
+   details:["Рамка на клей + шипы, диагонали ±1мм","Рёбра МДФ шаг 150-200мм","Блок замка 150×100×32мм","Блок петель 200×80×32мм","Обшивка фанерой, 8-12 струбцин","Выдержка минимум 60 мин"]},
+  {n:5,title:"ШЛИФОВКА",machine:"Шлифмашина эксцентриковая",time:"25-35 мин",color:"#92400e",
+   details:["Зерно 80 → неровности","120 → выравнивание","180 → под грунт","220 → между слоями лака","Торцы: скругление R2мм"]},
+  {n:6,title:"ПОКРАСКА",machine:"Краскопульт HVLP",time:"60-90 мин + сушка",color:"#be185d",
+   details:["Грунт 1 слой → сушка 30-40 мин","Шлифовка 220","Лак слой 1 → сушка 40-60 мин","Лак слой 2 → сушка 4-6 ч","Петли + замок по шаблону"]},
+];
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+let st = {doorIdx:0,finIdx:1,hwIdx:0,qty:10,rate:RATE};
+
+function gs(usd){return Math.round(usd*st.rate)}
+function fGs(n){return Math.round(n).toLocaleString('es-PY')}
+function fUsd(n){return n.toFixed(2)}
+function getDiscount(qty){return (DISCOUNTS.find(d=>qty>=d.min&&qty<=d.max)||DISCOUNTS[0]).pct}
+
+function calcDoor(){
+  const d=DOORS[st.doorIdx],f=FINISHES[st.finIdx],hw=HARDWARE[st.hwIdx];
+  const mat=d.baseMat+f.total+hw.hinge*d.hinges+hw.lock;
+  const carpHr=LABOR.carpDay/LABOR.hours, helpHr=LABOR.helpDay/LABOR.hours;
+  const laborGs=(d.carpMin/60)*carpHr+(d.helpMin/60)*helpHr;
+  const laborUsd=laborGs/st.rate;
+  const cost=mat+laborUsd+OVERHEAD;
+  return {mat,laborGs,laborUsd,cost,sell:d.sell,margin:Math.round(((d.sell-cost)/d.sell)*100)};
+}
+
+// ══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════════════════════════
+function showTab(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('.tab').forEach(t=>{if(t.textContent.trim().includes(
+    id==='calc'?'РАСЧЁТ':id==='plan'?'ПЛАН':id==='process'?'ПРОЦЕСС':'ЗАКАЗ'
+  ))t.classList.add('on')});
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER: CALCULATOR
+// ══════════════════════════════════════════════════════════════
+function renderCalc(){
+  const c=calcDoor(), d=DOORS[st.doorIdx];
+  document.getElementById('calc').innerHTML=`
+    <div class="card">
+      <div class="card-title">ТИП ДВЕРИ</div>
+      <div class="pills">${DOORS.map((d,i)=>`<div class="pill${i===st.doorIdx?' on':''}" onclick="st.doorIdx=${i};renderCalc()">${d.name}</div>`).join('')}</div>
+      <div class="card-title">ПОКРЫТИЕ</div>
+      <div class="pills">${FINISHES.map((f,i)=>`<div class="pill${i===st.finIdx?' on':''}" onclick="st.finIdx=${i};renderCalc()">${f.name}</div>`).join('')}</div>
+      <div class="card-title">ФУРНИТУРА</div>
+      <div class="pills">${HARDWARE.map((h,i)=>`<div class="pill${i===st.hwIdx?' on':''}" onclick="st.hwIdx=${i};renderCalc()">${h.name}</div>`).join('')}</div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="lbl">СЕБЕСТОИМОСТЬ</div><div class="val" style="color:${c.cost<80?'var(--green)':'var(--amber)'}">$${fUsd(c.cost)}</div><div class="sub">${fGs(gs(c.cost))} ₲</div></div>
+      <div class="metric"><div class="lbl">ЦЕНА ПРОДАЖИ</div><div class="val" style="color:var(--green)">$${c.sell}</div><div class="sub">${fGs(gs(c.sell))} ₲ (${d.range[0]}-${d.range[1]})</div></div>
+      <div class="metric"><div class="lbl">ПРИБЫЛЬ</div><div class="val" style="color:var(--amber)">$${fUsd(c.sell-c.cost)}</div><div class="sub">${fGs(gs(c.sell-c.cost))} ₲</div></div>
+      <div class="metric"><div class="lbl">МАРЖА</div><div class="val" style="color:var(--purple)">${c.margin}%</div><div class="sub">${d.es}</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">СТРУКТУРА СЕБЕСТОИМОСТИ</div>
+      <table class="tbl">
+        <tr><td>Материалы</td><td class="r">$${fUsd(c.mat)}</td></tr>
+        <tr><td>Труд (мастер+подсобник)</td><td class="r">${fGs(c.laborGs)} ₲ ($${fUsd(c.laborUsd)})</td></tr>
+        <tr><td>Накладные</td><td class="r">$${fUsd(OVERHEAD)}</td></tr>
+        <tr style="font-weight:700;border-top:2px solid var(--border)"><td>ИТОГО</td><td class="r" style="font-size:14px">$${fUsd(c.cost)}</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">КУРС ₲/$</div>
+      <div class="row">
+        <label>1 $ =</label>
+        <input class="num-input" type="number" value="${st.rate}" onchange="st.rate=+this.value||7600;renderCalc()"> ₲
+      </div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER: ORDER
+// ══════════════════════════════════════════════════════════════
+function renderOrder(){
+  const c=calcDoor(), d=DOORS[st.doorIdx];
+  const disc=getDiscount(st.qty);
+  const unitPrice=c.sell*(1-disc/100);
+  const total=unitPrice*st.qty;
+  const prepay=total*0.5;
+  const profit=(unitPrice-c.cost)*st.qty;
+  const days=Math.ceil(st.qty/5.5)+1;
+
+  document.getElementById('order').innerHTML=`
+    <div class="card">
+      <div class="card-title">БЫСТРЫЙ РАСЧЁТ ЗАКАЗА — ${d.name.toUpperCase()}</div>
+      <div class="row">
+        <label>Кол-во:</label>
+        <input class="num-input" type="number" value="${st.qty}" min="1" onchange="st.qty=Math.max(1,+this.value||1);renderOrder()">
+        <span style="font-size:11px;color:var(--muted)">дверей</span>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="lbl">ЦЕНА ЗА ШТ</div><div class="val" style="color:var(--green)">$${fUsd(unitPrice)}</div><div class="sub">${disc?'-'+disc+'% скидка':'без скидки'}</div></div>
+      <div class="metric"><div class="lbl">ИТОГО ЗАКАЗ</div><div class="val" style="color:var(--amber)">$${fUsd(total)}</div><div class="sub">${fGs(gs(total))} ₲</div></div>
+      <div class="metric"><div class="lbl">ПРЕДОПЛАТА 50%</div><div class="val" style="color:var(--blue)">$${fUsd(prepay)}</div><div class="sub">${fGs(gs(prepay))} ₲</div></div>
+      <div class="metric"><div class="lbl">ПРИБЫЛЬ</div><div class="val" style="color:var(--green)">$${fUsd(profit)}</div><div class="sub">${fGs(gs(profit))} ₲</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">УСЛОВИЯ</div>
+      <table class="tbl">
+        <tr><td>Срок производства</td><td class="r">~${days} раб.дней</td></tr>
+        <tr><td>Оплата</td><td class="r">50% + 50%</td></tr>
+        <tr><td>Доставка</td><td class="r">вкл. (до 50 км)</td></tr>
+        <tr><td>Скидка</td><td class="r">${disc}% (от ${DISCOUNTS.find(x=>x.pct===disc).min} шт)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">ШКАЛА СКИДОК</div>
+      <table class="tbl">
+        <tr><th>Кол-во</th><th>Скидка</th><th>Цена/шт</th></tr>
+        ${DISCOUNTS.map(x=>{
+          const p=c.sell*(1-x.pct/100);
+          return `<tr${x.pct===disc?' style="color:var(--amber);font-weight:700"':''}><td>${x.min}${x.max>999?'+':'-'+x.max}</td><td>${x.pct}%</td><td class="r">$${fUsd(p)}</td></tr>`;
+        }).join('')}
+      </table>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER: PLAN (SVG)
+// ══════════════════════════════════════════════════════════════
+function renderPlan(){
+  const GW=90,GH=56,S=6;
+  const W=GW*S+30,H=GH*S+30;
+  let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">`;
+
+  // Grid
+  for(let i=0;i<=GW;i++) svg+=`<line x1="${15+i*S}" y1="15" x2="${15+i*S}" y2="${15+GH*S}" stroke="#1e293b" stroke-width=".4"/>`;
+  for(let i=0;i<=GH;i++) svg+=`<line x1="15" y1="${15+i*S}" x2="${15+GW*S}" y2="${15+i*S}" stroke="#1e293b" stroke-width=".4"/>`;
+
+  // Walls
+  svg+=`<rect x="15" y="15" width="${GW*S}" height="${GH*S}" fill="none" stroke="#475569" stroke-width="2.5" rx="2"/>`;
+
+  // Gate
+  svg+=`<rect x="${15+40*S}" y="${15+GH*S-2}" width="${8*S}" height="4" fill="#0a0d14"/>`;
+  svg+=`<text x="${15+44*S}" y="${15+GH*S+10}" text-anchor="middle" fill="#64748b" font-size="7" font-weight="700">ВОРОТА</text>`;
+
+  // Zone separator
+  svg+=`<line x1="${15+40*S}" y1="${15+15*S}" x2="${15+40*S}" y2="${15+42*S}" stroke="#334155" stroke-width=".8" stroke-dasharray="5,3"/>`;
+  svg+=`<text x="${15+19*S}" y="${15+43*S}" text-anchor="middle" fill="#334155" font-size="6" letter-spacing="1">ПОДСОБНИК</text>`;
+  svg+=`<text x="${15+70*S}" y="${15+43*S}" text-anchor="middle" fill="#334155" font-size="6" letter-spacing="1">СТОЛЯР</text>`;
+  svg+=`<text x="${15+39*S}" y="${15+14*S}" text-anchor="middle" fill="#f59e0b" font-size="6" font-weight="700">ПЕРЕДАЧА</text>`;
+
+  // Zones
+  ZONES.forEach(z=>{
+    svg+=`<rect x="${15+z.x*S}" y="${15+z.y*S}" width="${z.w*S}" height="${z.h*S}" fill="${z.border}" fill-opacity=".12" stroke="${z.border}" stroke-width="1.2" ${z.step?'':'stroke-dasharray="3,2"'} rx="3"/>`;
+    if(z.step){
+      svg+=`<circle cx="${15+z.x*S+10}" cy="${15+z.y*S+10}" r="7" fill="${z.color}"/>`;
+      svg+=`<text x="${15+z.x*S+10}" y="${15+z.y*S+14}" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">${z.step}</text>`;
+    }
+    const cx=15+(z.x+z.w/2)*S, cy=15+(z.y+z.h/2)*S;
+    z.label.split('\n').forEach((l,i)=>{
+      svg+=`<text x="${cx}" y="${cy-6+i*11}" text-anchor="middle" fill="${z.border}" font-size="7.5" font-weight="700">${l}</text>`;
+    });
+    if(z.sub){
+      z.sub.split('\n').forEach((l,i)=>{
+        svg+=`<text x="${cx}" y="${cy+12+i*9}" text-anchor="middle" fill="#94a3b8" font-size="6">${l}</text>`;
+      });
+    }
+  });
+
+  // Arrows
+  svg+=`<defs><marker id="arr" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#f59e0b"/></marker></defs>`;
+  ARROWS.forEach(a=>{
+    svg+=`<line x1="${15+a.x1*S}" y1="${15+a.y1*S}" x2="${15+a.x2*S}" y2="${15+a.y2*S}" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr)"/>`;
+  });
+
+  // Dimensions
+  svg+=`<text x="${15+GW*S/2}" y="11" text-anchor="middle" fill="#475569" font-size="8">14 м</text>`;
+  svg+=`<text x="8" y="${15+GH*S/2}" text-anchor="middle" fill="#475569" font-size="8" transform="rotate(-90,8,${15+GH*S/2})">10 м</text>`;
+
+  svg+=`</svg>`;
+
+  document.getElementById('plan').innerHTML=`
+    <div class="lean-cards">
+      <div class="lean-card"><div class="lbl">ПЛОЩАДЬ</div><div class="val">140 м²</div></div>
+      <div class="lean-card"><div class="lbl">ПОТОК</div><div class="val">U-Lean</div></div>
+      <div class="lean-card"><div class="lbl">ЗОНЫ</div><div class="val">12 зон</div></div>
+      <div class="lean-card"><div class="lbl">ПУТЬ ДВЕРИ</div><div class="val">~24 м</div></div>
+    </div>
+    <div class="plan-wrap">${svg}</div>
+    <div class="card" style="margin-top:12px">
+      <div class="card-title">ПОТОК (против часовой стрелки)</div>
+      <div style="font-size:12px;line-height:2;color:var(--text)">
+        <span style="color:#d97706">📦 Ворота→Склад сырья</span> →
+        <span style="color:#dc2626">1️⃣ Форматник</span> →
+        <span style="color:#3b82f6">2️⃣ Рейсмус</span> →
+        <span style="color:#d97706">3️⃣ Фрезерный</span> →
+        <span style="color:#16a34a">4️⃣ Сборка</span> →
+        <span style="color:#f59e0b">5️⃣ Шлифовка</span> →
+        <span style="color:#ec4899">6️⃣ Покраска</span> →
+        <span style="color:#10b981">✅ Склад готовых→Ворота</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">LEAN-ПОКАЗАТЕЛИ</div>
+      <table class="tbl">
+        <tr><td>Такт-тайм</td><td class="r">~87 мин/дверь</td></tr>
+        <tr><td>WIP лимит</td><td class="r">4 двери макс</td></tr>
+        <tr><td>Узкое место</td><td class="r">Сборка (90 мин)</td></tr>
+        <tr><td>Выход/день</td><td class="r">5-6 дверей</td></tr>
+        <tr><td>Струбцин нужно</td><td class="r">24 шт</td></tr>
+        <tr><td>Стеллаж сушки</td><td class="r">4.8 м (5-6 дв.)</td></tr>
+      </table>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER: PROCESS
+// ══════════════════════════════════════════════════════════════
+function renderProcess(){
+  document.getElementById('process').innerHTML=`
+    <div class="card" style="display:flex;gap:16px;flex-wrap:wrap">
+      <div><div style="font-size:9px;color:var(--muted)">ПРОДУКТ</div><div style="font-size:13px;color:var(--amber);font-weight:700">Пустотелая 2000×800</div></div>
+      <div><div style="font-size:9px;color:var(--muted)">ВРЕМЯ</div><div style="font-size:13px;color:var(--green);font-weight:700">~3.5-4ч + 2ч ожидание</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">ВРЕМЕННАЯ ШКАЛА</div>
+      <div class="timeline">
+        <div style="flex:12;background:#dc2626;opacity:.85">Раскрой</div>
+        <div style="flex:10;background:#1d4ed8;opacity:.85">Калибр.</div>
+        <div style="flex:12;background:#b45309;opacity:.85">Фрез.</div>
+        <div style="flex:20;background:#166534;opacity:.85">Сборка</div>
+        <div style="flex:18;background:#374151;opacity:.5">Клей</div>
+        <div style="flex:12;background:#92400e;opacity:.85">Шлиф.</div>
+        <div style="flex:16;background:#be185d;opacity:.85">Краска</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:8px;color:#475569;margin-top:4px">
+        <span>0ч</span><span>1ч</span><span>2ч</span><span>3ч</span><span>4ч</span><span>5ч</span><span>6ч</span>
+      </div>
+    </div>
+    ${STEPS.map(s=>`
+      <div class="step" onclick="this.classList.toggle('open')">
+        <div class="step-head">
+          <div class="step-num" style="background:${s.color}">${s.n}</div>
+          <div class="step-info">
+            <div class="step-title">${s.title}</div>
+            <div class="step-machine">${s.machine}</div>
+          </div>
+          <div class="step-time">${s.time}</div>
+        </div>
+        <div class="step-body">
+          <div style="height:1px;background:${s.color};opacity:.2;margin-bottom:10px"></div>
+          ${s.details.map((d,i)=>`<div class="step-detail"><div class="n">${i+1}</div><div class="t">${d}</div></div>`).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <div class="card">
+      <div class="card-title">РОЛИ В КОНВЕЙЕРЕ</div>
+      <table class="tbl">
+        <tr><th>Кто</th><th>Зона</th></tr>
+        <tr><td style="color:#dc2626;font-weight:700">СТОЛЯР</td><td>Форматник → Рейсмус → Фрезерный → Сборка</td></tr>
+        <tr><td style="color:#ec4899;font-weight:700">ПОДСОБНИК</td><td>Шлифовка → Покраска → Фурнитура → Упаковка</td></tr>
+      </table>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+renderCalc();
+renderPlan();
+renderProcess();
+renderOrder();
+</script>
+</body>
+</html>
