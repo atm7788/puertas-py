@@ -88,6 +88,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-add{width:100%;padding:10px;border-radius:6px;border:none;background:var(--green);color:#0a0d14;font-weight:700;font-size:12px;cursor:pointer;letter-spacing:.5px;margin-top:6px;font-family:inherit}
 .btn-reset{padding:6px 12px;border-radius:6px;border:1px solid rgba(220,38,38,.3);background:rgba(220,38,38,.1);color:#fca5a5;font-size:10px;cursor:pointer;font-family:inherit}
 .badge{display:inline-block;background:var(--green);color:#0a0d14;font-size:8px;font-weight:700;padding:1px 4px;border-radius:8px;margin-left:2px;vertical-align:top}
+
+.faq-section{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.faq-section.open{border-color:var(--amber)}
+.faq-head{padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.faq-head .fnum{width:28px;height:28px;border-radius:8px;background:var(--amber);color:#0a0d14;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.faq-head .ftitle{flex:1;font-size:12px;font-weight:700;letter-spacing:.5px}
+.faq-head .farrow{font-size:10px;color:var(--muted);transition:.2s}
+.faq-section.open .farrow{transform:rotate(90deg)}
+.faq-body{display:none;padding:0 14px 14px}
+.faq-section.open .faq-body{display:block}
+.faq-item{padding:8px 0;border-bottom:1px solid #111}
+.faq-item:last-child{border:none}
+.faq-mat{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.faq-mat .fm-name{font-size:12px;color:var(--text);font-weight:600}
+.faq-mat .fm-es{font-size:10px;color:var(--amber);margin-top:2px}
+.faq-mat .fm-note{font-size:10px;color:var(--muted);margin-top:2px}
+.faq-mat .fm-price{font-size:11px;color:var(--green);font-weight:700;white-space:nowrap;text-align:right}
+.faq-q{padding:10px 0;border-bottom:1px solid #111}
+.faq-q:last-child{border:none}
+.faq-q .es-text{font-size:13px;color:var(--amber);font-weight:600;line-height:1.4;margin-bottom:4px}
+.faq-q .ru-text{font-size:10px;color:var(--muted);line-height:1.4}
+.faq-ask{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
+.faq-ask .qdot{width:20px;height:20px;border-radius:6px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--amber);font-weight:700;flex-shrink:0}
+.faq-ask .qtxt{font-size:11px;color:var(--text);line-height:1.5}
+.faq-calc{background:var(--bg3);border-radius:8px;padding:10px 12px;margin-top:6px}
+.faq-calc .fc-row{display:flex;justify-content:space-between;font-size:11px;color:var(--text);margin-bottom:4px}
+.faq-calc .fc-row:last-child{margin:0}
+.faq-calc .fc-row .fc-v{color:var(--green);font-weight:700}
 </style>
 </head>
 <body>
@@ -98,6 +126,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <button class="tab" onclick="showTab('process')"><span class="ico">⚙️</span>ПРОЦЕСС</button>
   <button class="tab" onclick="showTab('order')"><span class="ico">📦</span>ЗАКАЗ</button>
   <button class="tab" onclick="showTab('prices')"><span class="ico">🏪</span>ЦЕНЫ<span id="pbadge"></span></button>
+  <button class="tab" onclick="showTab('faq')"><span class="ico">📋</span>FAQ</button>
 </div>
 
 <div id="calc" class="page on"></div>
@@ -105,6 +134,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div id="process" class="page"></div>
 <div id="order" class="page"></div>
 <div id="prices" class="page"></div>
+<div id="faq" class="page"></div>
 
 <script>
 const RATE=7600, OVERHEAD=9.25, PRIMER_DEF=7.00;
@@ -238,11 +268,12 @@ function showTab(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.getElementById(id).classList.add('on');
-  const labels={calc:'РАСЧЁТ',plan:'ПЛАН',process:'ПРОЦЕСС',order:'ЗАКАЗ',prices:'ЦЕНЫ'};
+  const labels={calc:'РАСЧЁТ',plan:'ПЛАН',process:'ПРОЦЕСС',order:'ЗАКАЗ',prices:'ЦЕНЫ',faq:'FAQ'};
   document.querySelectorAll('.tab').forEach(t=>{if(t.textContent.trim().includes(labels[id]))t.classList.add('on')});
   if(id==='calc')renderCalc();
   if(id==='order')renderOrder();
   if(id==='prices')renderPrices();
+  if(id==='faq')renderFaq();
 }
 
 function renderCalc(){
@@ -506,6 +537,102 @@ function renderPrices(){
   if(!stores.length) h+=`<div class="card" style="text-align:center;color:var(--muted);font-size:12px;padding:24px 14px">Пока нет магазинов.<br>Добавьте после визита.</div>`;
 
   document.getElementById('prices').innerHTML=h;
+}
+
+function renderFaq(){
+  const sections=[
+    {n:1,title:"ДОСКА И БРУС",items:[
+      {name:"Эвкалипт сырой (пульгада)",es:"Eucalipto verde (por pulgada)",note:"Рамка дверей",price:"550–800 ₲/pulg."},
+      {name:"Эвкалипт сушёный (пульгада)",es:"Eucalipto secado (estufado)",note:"Экономия 12–16 дней сушки",price:"800–1.100 ₲"},
+      {name:"Кедр",es:"Cedro (tabla / listón)",note:"Массивные двери, месяц 4+",price:"1.500–1.800 ₲"},
+      {name:"Брус 50×32 мм эвкалипт",es:"Listón eucalipto 50×32 mm (por metro lineal)",note:"Рамка пустотелой двери",price:"₲/м.п."},
+    ],ask:[
+      {q:"¿Cuál es la humedad de la tabla?",r:"Нужна ≤14%, обычно будет 25–40%"},
+      {q:"¿Tienen madera secada? ¿Cuál es la diferencia de precio?",r:"Есть ли сушёная? Разница в цене?"},
+      {q:"¿Cuál es el pedido mínimo? ¿Tienen descuento por volumen?",r:"Мин. объём и скидка от объёма"},
+      {q:"¿El delivery está incluido? ¿Cuánto cuesta hasta mi zona?",r:"Доставка включена?"},
+      {q:"¿Pueden cortar a medida (50×32)?",r:"Распил в размер"},
+    ]},
+    {n:2,title:"ЛИСТОВЫЕ МАТЕРИАЛЫ",items:[
+      {name:"Фанера 4 мм (2440×1220)",es:"Terciada 4mm (placa 2440×1220)",note:"Обшивка двери (2 стороны)",price:"~$4,50/м²"},
+      {name:"МДФ 6 мм",es:"MDF 6mm",note:"Рёбра жёсткости",price:"~$6/м²"},
+      {name:"МДФ 9 мм",es:"MDF 9mm",note:"Запасной вариант",price:"~$7,50/м²"},
+    ],ask:[
+      {q:"¿Cuánto cuesta por placa y por m²?",r:"Цена за лист и за м²"},
+      {q:"¿Hacen corte en el lugar?",r:"Есть ли раскрой на месте?"},
+      {q:"¿La placa es pareja, sin delaminar?",r:"Качество — ровный ли лист?"},
+    ]},
+    {n:3,title:"РАСХОДНИКИ И ОТДЕЛКА",items:[
+      {name:"Клей столярный ПВА",es:"Cola de carpintero (PVA / cola blanca)",note:"Titebond или аналог",price:"~$4/кг"},
+      {name:"Грунт по дереву",es:"Sellador para madera",note:"",price:"~$7/л"},
+      {name:"Лак стандарт",es:"Barniz estándar (por litro)",note:"",price:"$8–9/л"},
+      {name:"Лак нетоксичный",es:"Barniz al agua (no tóxico / ecológico)",note:"Для кроваток",price:"$12–18/л"},
+      {name:"Наждачка 80/120/180/220",es:"Lija grano 80 / 120 / 180 / 220 (hoja o rollo)",note:"",price:"₲/лист"},
+    ],ask:[]},
+    {n:4,title:"ФУРНИТУРА",items:[
+      {name:"Петли стандарт (пара)",es:"Bisagra común (par)",note:"",price:"~$1,50"},
+      {name:"Петли средние (пара)",es:"Bisagra reforzada (par)",note:"",price:"~$3,00"},
+      {name:"Замок + ручка эконом",es:"Picaporte económico",note:"",price:"~$4"},
+      {name:"Замок + ручка средний",es:"Cerradura + manija",note:"",price:"~$7"},
+    ],ask:[]},
+    {n:5,title:"ВОПРОСЫ ПРО БИЗНЕС",items:[],ask:[
+      {q:"¿Trabajan con talleres? ¿Tienen condiciones para clientes fijos?",r:"Скидка за объём, кредитная линия"},
+      {q:"¿Quién más compra madera para puertas por esta zona?",r:"Узнаёшь конкурентов"},
+      {q:"¿Qué volumen mensual necesito para precio mayorista?",r:"Объём для оптовой цены"},
+      {q:"¿Pueden emitir factura?",r:"Для регистрации empresa unipersonal"},
+      {q:"¿Tienen delivery? ¿Cuál es el pedido mínimo para envío?",r:"Доставка и мин. заказ"},
+    ]},
+    {n:6,title:"НЕ ЗАБУДЬ СФОТОГРАФИРОВАТЬ",items:[
+      {name:"Ценники / прайс-лист",es:"Lista de precios",note:"Если дадут — забери копию",price:""},
+      {name:"Качество доски вблизи",es:"Calidad de la tabla (corte, textura)",note:"Торец, текстура",price:""},
+      {name:"Визитку магазина",es:"Tarjeta del local",note:"",price:""},
+      {name:"Условия оплаты",es:"Condiciones de pago",note:"Если висят на стене",price:""},
+    ],ask:[]},
+  ];
+
+  let h=`<div class="card" style="border-color:var(--amber)">
+    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px">📋 ЧЕК-ЛИСТ ДЛЯ ВИЗИТА В МАГАЗИН</div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.5">Показывай испанский текст продавцу прямо с экрана. Все названия — на парагвайском испанском.</div>
+  </div>`;
+
+  sections.forEach(s=>{
+    h+=`<div class="faq-section" onclick="this.classList.toggle('open')">`;
+    h+=`<div class="faq-head"><div class="fnum">${s.n}</div><div class="ftitle">${s.title}</div><div class="farrow">▸</div></div>`;
+    h+=`<div class="faq-body" onclick="event.stopPropagation()">`;
+    s.items.forEach(it=>{
+      h+=`<div class="faq-item"><div class="faq-mat">`;
+      h+=`<div><div class="fm-name">${it.name}</div><div class="fm-es">→ «${it.es}»</div>`;
+      if(it.note) h+=`<div class="fm-note">${it.note}</div>`;
+      h+=`</div>`;
+      if(it.price) h+=`<div class="fm-price">${it.price}</div>`;
+      h+=`</div></div>`;
+    });
+    if(s.ask.length){
+      h+=`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">`;
+      h+=`<div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-weight:700;margin-bottom:8px">СПРОСИ В МАГАЗИНЕ</div>`;
+      s.ask.forEach((q,i)=>{
+        h+=`<div class="faq-q"><div class="es-text">«${q.q}»</div><div class="ru-text">${q.r}</div></div>`;
+      });
+      h+=`</div>`;
+    }
+    h+=`</div></div>`;
+  });
+
+  h+=`<div class="card" style="margin-top:4px">`;
+  h+=`<div class="card-title">БЫСТРЫЙ РАСЧЁТ НА МЕСТЕ</div>`;
+  h+=`<div style="font-size:11px;color:var(--muted);margin-bottom:8px">1 пустотелая дверь ≈</div>`;
+  h+=`<div class="faq-calc">`;
+  h+=`<div class="fc-row"><span>Брус 50×32</span><span class="fc-v">7 м.п.</span></div>`;
+  h+=`<div class="fc-row"><span>Фанера 4 мм</span><span class="fc-v">1,6 м²</span></div>`;
+  h+=`<div class="fc-row"><span>МДФ 6 мм (рёбра)</span><span class="fc-v">0,5 м²</span></div>`;
+  h+=`<div class="fc-row"><span>Клей</span><span class="fc-v">50 г</span></div>`;
+  h+=`<div class="fc-row"><span>Грунт</span><span class="fc-v">0,3 л</span></div>`;
+  h+=`<div class="fc-row"><span>Лак</span><span class="fc-v">0,5 л</span></div>`;
+  h+=`</div>`;
+  h+=`<div style="font-size:11px;color:var(--amber);margin-top:10px;font-weight:600">× 20 = первая партия. Считай на месте!</div>`;
+  h+=`</div>`;
+
+  document.getElementById('faq').innerHTML=h;
 }
 
 renderCalc();renderPlan();renderProcess();renderOrder();updateBadge();
